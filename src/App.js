@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import SimpleStorageContract from '../build/contracts/SimpleStorage.json'
+import CapCoinContract from '../build/contracts/CapCoin.json'
 import getWeb3 from './utils/getWeb3'
 
 import './css/oswald.css'
 import './css/open-sans.css'
 import './css/pure-min.css'
 import './App.css'
-import Routes from './components/Routes'
+import Main from './components/Routes'
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,8 @@ class App extends Component {
 
     this.state = {
       storageValue: 0,
-      web3: null
+      web3: null,
+      contract: {}
     }
   }
 
@@ -45,33 +46,36 @@ class App extends Component {
      */
 
     const contract = require('truffle-contract')
-    const simpleStorage = contract(SimpleStorageContract)
-    simpleStorage.setProvider(this.state.web3.currentProvider)
+    const capCoin = contract(CapCoinContract)
+    capCoin.setProvider(this.state.web3.currentProvider)
 
     // Declaring this for later so we can chain functions on SimpleStorage.
-    var simpleStorageInstance
+    var capCoinInstance;
 
     // Get accounts.
     this.state.web3.eth.getAccounts((error, accounts) => {
-      simpleStorage.deployed().then((instance) => {
-        simpleStorageInstance = instance
+      capCoin.deployed().then((instance) => {
+        capCoinInstance = instance
 
         // Stores a given value, 5 by default.
-        return simpleStorageInstance.set(5, {from: accounts[0]})
-      }).then((result) => {
-        // Get the value from the contract to prove it worked.
-        return simpleStorageInstance.get.call(accounts[0])
-      }).then((result) => {
-        // Update state with the result.
-        return this.setState({ storageValue: result.c[0] })
+        this.setState({contract: capCoinInstance});
+        console.log(instance)
       })
+
+      // .then((result) => {
+      //   // Get the value from the contract to prove it worked.
+      //   return capCoinInstance.get.call(accounts[0])
+      // }).then((result) => {
+      //   // Update state with the result.
+      //   return this.setState({ storageValue: result.c[0] })
+      // })
     })
   }
 
   render() {
     return (
       <div className="App">
-        <Routes />
+        {/*<Main />*/}
       </div>
     );
   }

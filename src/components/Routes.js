@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Routes extends Component {
   componentDidMount () {}
@@ -10,9 +11,9 @@ class Routes extends Component {
       <Router history={history}>
         <MuiThemeProvider >
           <div>
-            <Switch>
+            {/* <Switch>
               <Route exact path='/manage/orders/:orderId' component={} />
-            </Switch>
+            </Switch>*/}
           </div>
         </MuiThemeProvider>
       </Router>
