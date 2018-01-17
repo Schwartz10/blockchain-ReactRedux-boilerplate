@@ -20,5 +20,4 @@ contract CapCoin {
     uint id = users.push(User(name, 0));
     userToOwner[id] = msg.sender;
   }
-
 }

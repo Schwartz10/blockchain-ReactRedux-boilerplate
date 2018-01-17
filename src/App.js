@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import CapCoinContract from '../build/contracts/CapCoin.json'
 import { fetchWeb3 } from './store/web3'
 import { fetchContract } from './store/contract'
+import { fetchAccounts } from './store/accounts';
 import Routes from './components/Routes'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -16,15 +17,18 @@ class App extends Component {
   }
 
   async componentWillMount() {
-    // Get network provider and web3 instance.
+    // Get network provider, web3, and truffle contract instance and store them on state.
     await this.props.getWeb3()
-    this.props.getContract(this.props.web3)
+    await this.props.getContract(this.props.web3)
+    this.props.getAccounts(this.props.web3)
   }
 
   render() {
     return (
       <div className="App">
-        <Routes />
+        <MuiThemeProvider >
+          <Routes />
+        </MuiThemeProvider>
       </div>
     );
   }
@@ -43,6 +47,9 @@ function mapDispatchToProps(dispatch){
     },
     getContract: function (web3){
       return dispatch(fetchContract(web3))
+    },
+    getAccounts: function (web3){
+      return dispatch(fetchAccounts(web3))
     }
   }
 }

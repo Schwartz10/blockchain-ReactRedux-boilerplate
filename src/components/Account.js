@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
+import Signup from './Signup'
 
-export default class Account extends Component {
+class Account extends Component {
   componentDidMount () {
     //fetch the account
   }
@@ -9,7 +10,8 @@ export default class Account extends Component {
   render () {
     return (
       <div>
-        <h1>Accounts</h1>
+        <h1>Account</h1>
+        <Signup />
       </div>
     )
   }
@@ -18,12 +20,12 @@ export default class Account extends Component {
 /**
  * CONTAINER
  */
-// const mapState = (state) => {
-//   return {}
-// }
+const mapState = (state) => {
+  return {}
+}
 
-// const mapDispatch = (dispatch) => {
-//   return {}
-// }
+const mapDispatch = (dispatch) => {
+  return {}
+}
 
-// export default connect(mapState, mapDispatch)(Account)
+export default connect(mapState, mapDispatch)(Account)
