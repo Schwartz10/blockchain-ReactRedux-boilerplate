@@ -4,4 +4,3 @@
   Test dapp:            npm test
   Run dev server:       npm run start
   Build for production: npm run build
-
