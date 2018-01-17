@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import CapCoinContract from '../build/contracts/CapCoin.json'
 import getWeb3 from './utils/getWeb3'
+import Routes from './components/Routes'
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -75,7 +76,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/*<Main />*/}
+        <Routes />
       </div>
     );
   }

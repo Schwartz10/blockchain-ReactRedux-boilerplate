@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {Route, Switch, Router} from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Account from './Account';
+import Drawer from './Drawer';
+import history from '../history';
 
-class Routes extends Component {
+export default class Routes extends Component {
   componentDidMount () {}
 
   render () {
@@ -11,9 +14,10 @@ class Routes extends Component {
       <Router history={history}>
         <MuiThemeProvider >
           <div>
-            {/* <Switch>
-              <Route exact path='/manage/orders/:orderId' component={} />
-            </Switch>*/}
+            <Drawer />
+            <Switch>
+              <Route exact path='/profile' component={Account} />
+            </Switch>
           </div>
         </MuiThemeProvider>
       </Router>
@@ -24,12 +28,12 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
-  return {}
-}
+// const mapState = (state) => {
+//   return {}
+// }
 
-const mapDispatch = (dispatch) => {
-  return {}
-}
+// const mapDispatch = (dispatch) => {
+//   return {}
+// }
 
-export default connect(mapState, mapDispatch)(Routes)
+// export default connect(mapState, mapDispatch)(Routes)
