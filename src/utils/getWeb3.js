@@ -11,9 +11,7 @@ let getWeb3 = new Promise(function(resolve, reject) {
       // Use Mist/MetaMask's provider.
       web3 = new Web3(web3.currentProvider)
 
-      results = {
-        web3: web3
-      }
+      results = { web3 }
 
       console.log('Injected web3 detected.');
 
@@ -25,9 +23,7 @@ let getWeb3 = new Promise(function(resolve, reject) {
 
       web3 = new Web3(provider)
 
-      results = {
-        web3: web3
-      }
+      results = {web3}
 
       console.log('No web3 instance injected, using Local web3.');
 
