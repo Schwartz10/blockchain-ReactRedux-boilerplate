@@ -1,27 +1,22 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {connect} from 'react-redux'
 import Signup from './Signup'
+import Exchange from './Exchange'
 
-class Account extends Component {
-  componentDidMount () {
-    //fetch the account
-  }
-
-  render () {
-    return (
-      <div>
-        <h1>Account</h1>
-        <Signup />
-      </div>
-    )
-  }
-}
+const Account = props => (
+  <div>
+    <h1>Account</h1>
+    {props.user && props.user.name ? <Exchange /> : <Signup />}
+  </div>
+  )
 
 /**
  * CONTAINER
  */
 const mapState = (state) => {
-  return {}
+  return {
+    user: state.user
+  }
 }
 
 const mapDispatch = (dispatch) => {
