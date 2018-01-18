@@ -1,5 +1,3 @@
-import CapCoinContract from '../../build/contracts/CapCoin.json';
-
 /**
  * INITIAL STATE
  */

@@ -19,10 +19,11 @@ const createUser = user => ({type: CREATE_USER, user})
  */
 
 export const fetchUser = (userAddress)  => {}
-export const addUser = (name, contractFunc) => {
-  contractFunc(name)
-}
-
+export const addUser = (name, contractFunc, account) =>
+  dispatch =>
+    contractFunc(name, {from: account})
+    .then(res => dispatch(createUser(res.logs[0].args)))
+    .catch(err => console.log(err))
 
 /**
  * REDUCER

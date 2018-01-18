@@ -2,17 +2,13 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
+import { addUser } from '../store/user'
 
 class Signup extends Component {
 
   constructor(props){
     super(props)
     this.state = {name: ""}
-  }
-
-
-  componentDidMount () {
-    //fetch the account
   }
 
   handleChange = (event) => {
@@ -32,7 +28,7 @@ class Signup extends Component {
         /><br />
         <RaisedButton
           onClick={(e) =>
-          this.props.createUser(e, this.state.name, this.props.contract)}
+          this.props.createUser(e, this.state.name, this.props.contract, this.props.accounts[0])}
           label="Create Account" primary={true}
         />
       </div>
@@ -46,16 +42,16 @@ class Signup extends Component {
 const mapState = state => {
   return {
     web3: state.web3,
-    contract: state.contract
+    contract: state.contract,
+    accounts: state.accounts
   }
 }
 
 const mapDispatch = dispatch => {
   return {
-    createUser: function(e, name, contract){
+    createUser: function(e, name, contract, account){
       e.preventDefault();
-      contract.createUser(name)
-      // dispatch(name, contract.createUser);
+      dispatch(addUser(name, contract.createUser, account));
     }
   }
 }

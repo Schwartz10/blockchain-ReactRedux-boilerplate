@@ -1,11 +1,11 @@
 pragma solidity ^0.4.18;
 
 contract CapCoin {
+
+  event NewUser(uint userId, string name);
+
   uint coinSupply = 1000000;
   uint coinsBought = 0;
-
-  // Post to owner mapping
-  // caption to owner mapping
 
   struct User {
     string name;
@@ -19,5 +19,6 @@ contract CapCoin {
   function createUser(string name) public {
     uint id = users.push(User(name, 0));
     userToOwner[id] = msg.sender;
+    NewUser(id, name);
   }
 }

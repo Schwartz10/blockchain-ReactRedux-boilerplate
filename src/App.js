@@ -14,9 +14,14 @@ import './App.css'
 class App extends Component {
   constructor(props) {
     super(props);
+    this.collectBlockchainInfo = this.collectBlockchainInfo.bind(this)
   }
 
-  async componentWillMount() {
+  componentWillMount() {
+    this.collectBlockchainInfo()
+  }
+
+  async collectBlockchainInfo() {
     // Get network provider, web3, and truffle contract instance and store them on state.
     await this.props.getWeb3()
     await this.props.getContract(this.props.web3)
