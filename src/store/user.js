@@ -32,10 +32,7 @@ export const fetchUser = (contractFunc, account)  =>
 export const addUser = (name, contractFunc, account) =>
   dispatch =>
     contractFunc(name, {from: account})
-    .then(res => {
-
-      console.log(res)
-      dispatch(createUser(res.logs[0].args))})
+    .then(res => dispatch(createUser(res.logs[0].args)))
     .catch(err => console.log(err))
 
 /**
