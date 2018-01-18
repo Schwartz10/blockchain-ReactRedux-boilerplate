@@ -61,9 +61,7 @@ function mapDispatchToProps(dispatch){
       return dispatch(fetchAccounts(web3));
     },
     findUser: function (contractFunc, account){
-        contractFunc.call({from: account})
-        .then(res => console.log(res))
-      // return dispatch(fetchUser(web3));
+      return dispatch(fetchUser(contractFunc, account));
     }
   }
 }
