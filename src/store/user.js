@@ -53,7 +53,7 @@ export default function (state = defaultUser, action) {
     case CREATE_USER:
       return action.user;
     case BUY_TOKENS:
-      return Object.assign({}, state, action.amount)
+      return Object.assign({}, state, {coinBalance: action.amount})
     default:
       return state
   }
