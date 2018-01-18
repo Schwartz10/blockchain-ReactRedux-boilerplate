@@ -22,7 +22,10 @@ export const fetchUser = (web3, address)  => {}
 export const addUser = (name, contractFunc, account) =>
   dispatch =>
     contractFunc(name, {from: account})
-    .then(res => dispatch(createUser(res.logs[0].args)))
+    .then(res => {
+
+      console.log(res)
+      dispatch(createUser(res.logs[0].args))})
     .catch(err => console.log(err))
 
 /**
