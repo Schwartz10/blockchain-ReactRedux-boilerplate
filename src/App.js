@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchWeb3 } from './store/web3'
 import { fetchContract } from './store/contract'
 import { fetchAccounts } from './store/accounts';
+import { fetchUser } from './store/user'
 import Routes from './components/Routes'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
@@ -25,7 +26,8 @@ class App extends Component {
     // Get network provider, web3, and truffle contract instance and store them on state.
     await this.props.getWeb3()
     await this.props.getContract(this.props.web3)
-    this.props.getAccounts(this.props.web3)
+    await this.props.getAccounts(this.props.web3)
+    // await this.props.getUser(this.props.web3)
   }
 
   render() {
@@ -48,13 +50,16 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
   return {
     getWeb3: function (){
-      return dispatch(fetchWeb3())
+      return dispatch(fetchWeb3());
     },
     getContract: function (web3){
-      return dispatch(fetchContract(web3))
+      return dispatch(fetchContract(web3));
     },
     getAccounts: function (web3){
-      return dispatch(fetchAccounts(web3))
+      return dispatch(fetchAccounts(web3));
+    },
+    getUser: function (web3){
+      return dispatch(fetchUser(web3));
     }
   }
 }

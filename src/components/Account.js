@@ -1,12 +1,12 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import Signup from './Signup'
-import Exchange from './Exchange'
+import Profile from './Profile'
 
 const Account = props => (
   <div>
     <h1>Account</h1>
-    {props.user && props.user.name ? <Exchange /> : <Signup />}
+    {props.user && props.user.name ? <Profile /> : <Signup />}
   </div>
   )
 

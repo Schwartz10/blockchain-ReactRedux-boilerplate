@@ -3,6 +3,7 @@ import {Route, Switch, Router} from 'react-router-dom'
 import Account from './Account';
 import Drawer from './Drawer';
 import history from '../history';
+import Exchange from './Exchange';
 
 export default class Routes extends Component {
   componentDidMount () {}
@@ -14,6 +15,7 @@ export default class Routes extends Component {
             <Drawer />
             <Switch>
               <Route exact path='/profile' component={Account} />
+              <Route exact path='/exchange' component={Exchange} />
             </Switch>
           </div>
       </Router>
