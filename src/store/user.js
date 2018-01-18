@@ -8,16 +8,18 @@ const defaultUser = {}
  */
 const GET_USER = 'GET_USER';
 const CREATE_USER = 'CREATE_USER';
+const BUY_TOKENS = 'BUY_TOKENS';
 
 /**
  * ACTION CREATORS
  */
 const getUser = user => ({type: GET_USER, user})
 const createUser = user => ({type: CREATE_USER, user})
+const boughtTokens = amount => ({type: BUY_TOKENS, amount})
+
 /**
  * THUNK CREATORS
  */
-
 export const fetchUser = (contractFunc, account)  =>
   dispatch =>
     contractFunc.call({from: account})
@@ -32,11 +34,14 @@ export const fetchUser = (contractFunc, account)  =>
 export const addUser = (name, contractFunc, account) =>
   dispatch =>
     contractFunc(name, {from: account})
-    .then(res => {
+    .then(res => dispatch(createUser(res.logs[0].args)))
+    .catch(err => console.log(err));
 
-      console.log(res)
-      dispatch(createUser(res.logs[0].args))})
-    .catch(err => console.log(err))
+export const buyTokens = (amount, contractFunc, account) =>
+  dispatch =>
+    contractFunc(amount, {from: account})
+    .then(res => dispatch(boughtTokens(res.logs[0].args.coinBalance.c[0])))
+    .catch(err => console.log(err));
 
 /**
  * REDUCER
@@ -47,6 +52,8 @@ export default function (state = defaultUser, action) {
       return action.user;
     case CREATE_USER:
       return action.user;
+    case BUY_TOKENS:
+      return Object.assign({}, state, {coinBalance: action.amount})
     default:
       return state
   }
