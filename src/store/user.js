@@ -18,11 +18,24 @@ const createUser = user => ({type: CREATE_USER, user})
  * THUNK CREATORS
  */
 
-export const fetchUser = (web3, address)  => {}
+export const fetchUser = (contractFunc, account)  =>
+  dispatch =>
+    contractFunc.call({from: account})
+    .then(res => {
+      let user = {}
+      user.name = res[0];
+      user.coinBalance = Number(res[1].toString(10));
+      return dispatch(getUser(user))
+    })
+    .catch(err => console.log(err))
+
 export const addUser = (name, contractFunc, account) =>
   dispatch =>
     contractFunc(name, {from: account})
-    .then(res => dispatch(createUser(res.logs[0].args)))
+    .then(res => {
+
+      console.log(res)
+      dispatch(createUser(res.logs[0].args))})
     .catch(err => console.log(err))
 
 /**

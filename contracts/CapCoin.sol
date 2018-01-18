@@ -6,6 +6,11 @@ contract CapCoin {
 
   uint coinSupply = 1000000;
   uint coinsBought = 0;
+  uint contractNum;
+
+  function CapCoin () {
+    contractNum = 1;
+  }
 
   struct User {
     string name;
