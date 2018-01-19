@@ -36,7 +36,7 @@ class CreatePost extends Component {
               <h3>Post Preview:</h3>
               <Post
                 username={this.props.user.name}
-                tokenPot={5}
+                tokenPot={-5}
                 postUrl={this.state.postUrl}
                 isPreview={true}
               />

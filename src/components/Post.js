@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux'
+import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle } from 'material-ui/Card';
 import FlatButton from 'material-ui/FlatButton';
+import LikePhoto from './LikePhoto';
 
 const cardStyle = {
   width: '30vw'
@@ -13,15 +13,18 @@ const Post = props => (
       title={props.username}
     />
     <CardMedia
-      overlay={<CardTitle title={'Token pot: ' + props.tokenPot} />}
+      overlay={<CardTitle title={'Total InstaCoins: ' + props.tokenPot} />}
     >
       <img src={props.postUrl} alt="" />
     </CardMedia>
     {!props.isPreview &&
       <div>
-        <CardTitle title="Leave a Caption"/>
+        <CardTitle title="Like this pic?"/>
         <CardActions>
-          <FlatButton label="Submit" />
+          <LikePhoto
+            postUrl={props.postUrl}
+            postAddress={props.address}
+          />
         </CardActions>
       </div>
     }
