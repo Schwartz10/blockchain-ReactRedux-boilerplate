@@ -27,6 +27,8 @@ export const fetchUser = (contractFunc, account)  =>
       let user = {}
       user.name = res[0];
       user.coinBalance = Number(res[1].toString(10));
+      user.postUrl = res[2];
+      user.postLottery = Number(res[3].toString(10));
       return dispatch(getUser(user))
     })
     .catch(err => console.log(err))

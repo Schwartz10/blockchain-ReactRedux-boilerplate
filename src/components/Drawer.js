@@ -19,7 +19,7 @@ export default class DrawerNav extends React.Component {
     return (
       <div>
         <RaisedButton
-          label="Open Drawer"
+          label="Menu"
           onClick={this.handleToggle}
         />
         <Drawer
@@ -29,6 +29,7 @@ export default class DrawerNav extends React.Component {
           onRequestChange={(open) => this.setState({open})}
         >
           <Link to="/explore"><MenuItem onClick={this.handleClose}>Explore</MenuItem></Link>
+          <Link to="/create-post"><MenuItem onClick={this.handleClose}>Create Post</MenuItem></Link>
           <Link to="/profile"><MenuItem onClick={this.handleClose}>My Profile</MenuItem></Link>
           <Link to="/exchange"><MenuItem onClick={this.handleClose}>Buy CapCoins</MenuItem></Link>
         </Drawer>
