@@ -11,7 +11,8 @@ class Explore extends Component {
 
   componentWillReceiveProps(nextProps){
     if (this.props.contract.getPosts) {
-      this.props.getPosts(this.props.contract.getPosts);
+      this.props.getPosts(this.props.contract.getPosts,
+        this.props.contract.addressToPost);
     }
   }
 
@@ -35,8 +36,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getPosts: function(contractFunc){
-      return dispatch(fetchPosts(contractFunc));
+    getPosts: function(contractFunc, addressToPost){
+      return dispatch(fetchPosts(contractFunc, addressToPost));
     }
   }
 }

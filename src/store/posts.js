@@ -13,7 +13,7 @@ const GET_POSTS = 'GET_POSTS';
  * ACTION CREATORS
  */
 const createPost = post => ({type: CREATE_POST, post});
-const getPosts = posts => ({type: GET_POSTS, posts});
+const gotPosts = posts => ({type: GET_POSTS, posts});
 
 /**
  * THUNK CREATORS
@@ -29,10 +29,23 @@ export const post = (url, contractFunc, account) =>
     })
     .catch(err => console.log(err));
 
-export const fetchPosts = contractFunc =>
+export const fetchPosts = (fetchAddressArray, addressToPostFunc) =>
   dispatch =>
-    contractFunc.call()
-    .then(res => console.log(res))
+    fetchAddressArray.call()
+    .then(res => {
+      let addresses = res.map(address => addressToPostFunc(address))
+      return Promise.all(addresses)
+    })
+    .then(posts => {
+      let finalArr = posts.map(post => {
+        let completedPost = {}
+        completedPost.postUrl = post[0];
+        completedPost.username = post[1];
+        completedPost.tokenPot = post[2].toString(10);
+        return completedPost;
+      })
+      dispatch(gotPosts(finalArr))
+    })
     .catch(err => console.log(err))
 
 /**
@@ -44,6 +57,8 @@ export default function (state = defaultPosts, action) {
       let posts = state.slice()
       posts.push(action.post)
       return posts;
+    case GET_POSTS:
+      return action.posts;
     default:
       return state
   }
