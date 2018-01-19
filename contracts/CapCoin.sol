@@ -22,7 +22,9 @@ contract CapCoin {
 
   struct Post {
     string url;
+    string userName;
     uint lotteryAmount;
+    string[] captions;
   }
 
   mapping (address => User) public addressToUser;
@@ -63,9 +65,21 @@ contract CapCoin {
     var post = addressToPost[msg.sender];
     post.url = url;
     post.lotteryAmount = 5;
+    post.userName = addressToUser[msg.sender].name;
+
     posts.push(msg.sender) -1;
     addressToUser[msg.sender].coinBalance -= 5;
     CreatedPost(url);
+  }
+
+  function getPosts() public view returns (address[]) {
+      return posts;
+  }
+
+  function seed(string name, string url, uint amount) public {
+      createUser(name);
+      buyTokens(amount);
+      createPost(url);
   }
 
   function() internal payable {}
