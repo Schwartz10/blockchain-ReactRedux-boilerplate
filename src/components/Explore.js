@@ -10,7 +10,7 @@ class Explore extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if (this.props.contract.getPosts) {
+    if (this.props.contract.getPosts && this.props.posts.length === 0) {
       this.props.getPosts(this.props.contract.getPosts,
         this.props.contract.addressToPost);
     }
@@ -20,6 +20,18 @@ class Explore extends Component {
     return(
       <div>
         <h1>Explore</h1>
+        {this.props.posts.length > 0 &&
+          this.props.posts.map(post =>
+            <div key={post.username}>
+              <Post
+                username={post.username}
+                tokenPot={post.tokenPot}
+                postUrl={post.postUrl}
+                isPreview={false}
+              />
+              <br />
+            </div>
+        )}
       </div>
     )
   }
