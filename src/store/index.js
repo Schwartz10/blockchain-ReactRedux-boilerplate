@@ -6,9 +6,10 @@ import user from './user'
 import web3 from './web3'
 import contract from './contract'
 import accounts from './accounts'
+import posts from './posts'
 
 
-export const reducer = combineReducers({ user, web3, contract, accounts })
+export const reducer = combineReducers({ user, web3, contract, accounts, posts })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})

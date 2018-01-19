@@ -20,7 +20,11 @@ const createPost = post => ({type: CREATE_POST, post})
 export const post = (url, contractFunc, account) =>
   dispatch =>
     contractFunc(url, {from: account})
-    .then(res => dispatch(createUser(res.logs[0].args)))
+    .then(res => {
+      let newPost = {}
+      newPost[account] = res.logs[0].args.url;
+      return dispatch(createPost(newPost));
+    })
     .catch(err => console.log(err));
 
 /**
@@ -29,7 +33,9 @@ export const post = (url, contractFunc, account) =>
 export default function (state = defaultPosts, action) {
   switch (action.type) {
     case CREATE_POST:
-      return state.slice().push(action.post);
+      let posts = state.slice()
+      posts.push(action.post)
+      return posts;
     default:
       return state
   }

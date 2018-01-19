@@ -3,6 +3,8 @@ import {connect} from 'react-redux'
 import { Link } from 'react-router-dom';
 import TextField from 'material-ui/TextField';
 import Post from './Post';
+import RaisedButton from 'material-ui/RaisedButton';
+import { post } from '../store/posts';
 
 class CreatePost extends Component {
   constructor(props){
@@ -38,6 +40,11 @@ class CreatePost extends Component {
                 postUrl={this.state.postUrl}
                 isPreview={true}
               />
+              <RaisedButton
+                onClick={e =>
+                this.props.post(e, this.state.postUrl, this.props.contract.createPost, this.props.accounts[0])}
+                label="Create Post" primary={true}
+              />
             </div>
           }
         </div>
@@ -57,12 +64,17 @@ class CreatePost extends Component {
 const mapState = (state) => {
   return {
     user: state.user,
-    contract: state.contract
+    contract: state.contract,
+    accounts: state.accounts
   }
 }
 
 const mapDispatch = (dispatch) => {
   return {
+    post: function(e, postUrl, contractFunc, account){
+      e.preventDefault();
+      return dispatch(post(postUrl, contractFunc, account));
+    }
   }
 }
 

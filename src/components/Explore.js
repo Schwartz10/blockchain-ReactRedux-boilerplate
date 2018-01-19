@@ -7,7 +7,6 @@ export default class Explore extends Component {
     super(props);
   }
 
-
   render(){
     return(
       <div>

@@ -63,6 +63,7 @@ contract CapCoin {
     var post = addressToPost[msg.sender];
     post.url = url;
     post.lotteryAmount = 5;
+    posts.push(msg.sender) -1;
     addressToUser[msg.sender].coinBalance -= 5;
     CreatedPost(url);
   }
