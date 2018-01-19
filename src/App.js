@@ -20,15 +20,18 @@ class App extends Component {
 
   componentWillMount() {
     this.collectBlockchainInfo()
+    .then(() => {
+      this.props.findUser(this.props.contract.getUser, this.props.accounts[0])
+    })
   }
 
   async collectBlockchainInfo() {
     // Get network provider, web3, and truffle contract instance and store them on state.
-    await this.props.getWeb3()
-    await this.props.getContract(this.props.web3)
-    await this.props.getAccounts(this.props.web3)
-    await this.props.findUser(this.props.contract.getUser, this.props.accounts[0])
+    return Promise.all([await this.props.getWeb3(),
+     this.props.getContract(this.props.web3),
+     this.props.getAccounts(this.props.web3)])
   }
+
 
   render() {
     return (

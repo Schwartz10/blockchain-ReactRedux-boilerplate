@@ -46,11 +46,12 @@ contract CapCoin {
     return users;
   }
 
-  function getUser() public view returns (string, uint, string, uint) {
+  function getUser() public view returns (string, uint, string, uint, address) {
     return (addressToUser[msg.sender].name,
       addressToUser[msg.sender].coinBalance,
       addressToPost[msg.sender].url,
-      addressToPost[msg.sender].lotteryAmount);
+      addressToPost[msg.sender].lotteryAmount,
+      msg.sender);
   }
 
   function buyTokens(uint amount) public {

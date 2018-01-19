@@ -10,9 +10,9 @@ class Explore extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if (Object.keys(nextProps.contract).length && nextProps.accounts.length) {
-      this.props.getPosts(this.props.contract.getPosts);
-    }
+    // if (Object.keys(nextProps.contract).length && nextProps.accounts.length) {
+    //   this.props.getPosts(this.props.contract.getPosts);
+    // }
   }
 
   render(){
