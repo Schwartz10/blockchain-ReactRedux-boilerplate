@@ -44,7 +44,7 @@ class CreatePost extends Component {
               /><br />
             </div>
             :
-            <h4>You have to buy InstaCoins First!</h4>
+            <h4 className="error-message">You have to buy InstaCoins First!</h4>
             }
             <h4 id="coin-count">You currently have {this.props.user.coinBalance} Coins <br /></h4>
             { this.state.postUrl.length &&

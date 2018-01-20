@@ -120,3 +120,6 @@ code {
   right: 7.5%;
 }
 
+.error-message {
+  color: red
+}
