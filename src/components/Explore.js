@@ -19,20 +19,19 @@ class Explore extends Component {
   render(){
     return(
       <div>
-        <h1>Explore</h1>
-        {this.props.posts.length > 0 &&
-          this.props.posts.map(post =>
-            <div key={post.username}>
-              <Post
-                username={post.username}
-                tokenPot={post.tokenPot}
-                postUrl={post.postUrl}
-                address={post.address}
-                isPreview={false}
-              />
-              <br />
-            </div>
-        )}
+          <h1 className="single-view-header">Explore</h1>
+          {this.props.posts.length > 0 &&
+            this.props.posts.map(post =>
+              <div id="post-container" key={post.username}>
+                  <Post
+                    username={post.username}
+                    tokenPot={post.tokenPot}
+                    postUrl={post.postUrl}
+                    address={post.address}
+                    isPreview={false}
+                  />
+              </div>
+          )}
       </div>
     )
   }
