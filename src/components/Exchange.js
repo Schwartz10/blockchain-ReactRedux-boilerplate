@@ -17,7 +17,7 @@ class Exchange extends Component {
   render() {
     return (
       <div>
-        <h1>Buy Tokens</h1>
+        <h1>Buy InstaCoins</h1>
         <SelectField
           floatingLabelText="Coin Amount"
           value={this.state.value}
@@ -35,6 +35,7 @@ class Exchange extends Component {
           this.props.buyTokens(e, this.state.value, this.props.contract.buyTokens, this.props.accounts[0])}
           label="Buy Tokens" primary={true}
         />
+        <h3>You have {this.props.user.coinBalance} Coins</h3>
       </div>
     );
   }

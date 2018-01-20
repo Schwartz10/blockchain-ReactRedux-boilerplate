@@ -25,7 +25,7 @@ class CreatePost extends Component {
         {this.props.user ?
         <div>
           <h1>Create Your Post {this.props.user.name}</h1>
-          <h3>You currently have {this.props.user.coinBalance} Tokens <br /></h3>
+          <h3>You currently have {this.props.user.coinBalance} Coins <br /></h3>
           <TextField
             value={this.props.postUrl}
             hintText={!this.state.postUrl.length && "Enter Post URL"}
@@ -36,7 +36,7 @@ class CreatePost extends Component {
               <h3>Post Preview:</h3>
               <Post
                 username={this.props.user.name}
-                tokenPot={5}
+                tokenPot={-5}
                 postUrl={this.state.postUrl}
                 isPreview={true}
               />

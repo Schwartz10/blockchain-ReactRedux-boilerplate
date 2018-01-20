@@ -27,6 +27,7 @@ class Explore extends Component {
                 username={post.username}
                 tokenPot={post.tokenPot}
                 postUrl={post.postUrl}
+                address={post.address}
                 isPreview={false}
               />
               <br />

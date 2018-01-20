@@ -31,7 +31,7 @@ export default class DrawerNav extends React.Component {
           <Link to="/explore"><MenuItem onClick={this.handleClose}>Explore</MenuItem></Link>
           <Link to="/create-post"><MenuItem onClick={this.handleClose}>Create Post</MenuItem></Link>
           <Link to="/profile"><MenuItem onClick={this.handleClose}>My Profile</MenuItem></Link>
-          <Link to="/exchange"><MenuItem onClick={this.handleClose}>Buy CapCoins</MenuItem></Link>
+          <Link to="/exchange"><MenuItem onClick={this.handleClose}>Buy InstaCoins</MenuItem></Link>
         </Drawer>
       </div>
     );
