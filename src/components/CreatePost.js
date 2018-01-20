@@ -42,7 +42,7 @@ class CreatePost extends Component {
               />
               <RaisedButton
                 onClick={e =>
-                this.props.post(e, this.state.postUrl, this.props.contract.createPost, this.props.accounts[0])}
+                this.props.post(e, this.state.postUrl, this.props.contract.createPost, this.props.accounts[0], this.props.user.name)}
                 label="Create Post" primary={true}
               />
             </div>
@@ -71,9 +71,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    post: function(e, postUrl, contractFunc, account){
+    post: function(e, postUrl, contractFunc, account, username){
       e.preventDefault();
-      return dispatch(post(postUrl, contractFunc, account));
+      return dispatch(post(postUrl, contractFunc, account, username));
     }
   }
 }

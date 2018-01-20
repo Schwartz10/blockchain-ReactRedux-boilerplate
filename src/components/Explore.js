@@ -22,7 +22,7 @@ class Explore extends Component {
           <h1 className="single-view-header">Explore</h1>
           {this.props.posts.length > 0 &&
             this.props.posts.map(post =>
-              <div id="post-container" key={post.username}>
+                <div id="post-container" key={post.username}>
                   <Post
                     username={post.username}
                     tokenPot={post.tokenPot}
@@ -30,7 +30,7 @@ class Explore extends Component {
                     address={post.address}
                     isPreview={false}
                   />
-              </div>
+                </div>
           )}
       </div>
     )
