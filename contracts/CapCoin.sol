@@ -6,7 +6,7 @@ contract CapCoin is Ownable {
 
   event NewUser(string name);
   event BoughtTokens(uint coinBalance);
-  event CreatedPost(string url);
+  event CreatedPost(string url, string caption);
   event LikedPost(int lotteryAmount, string posterName,
     address poster, uint posterCoinbalance, string likerName,
     address liker, uint likerCoinbalance);
@@ -30,6 +30,7 @@ contract CapCoin is Ownable {
     string userName;
     int lotteryAmount;
     address owner;
+    string caption;
   }
 
   mapping (address => User) public addressToUser;
@@ -60,17 +61,18 @@ contract CapCoin is Ownable {
     BoughtTokens(addressToUser[msg.sender].coinBalance);
   }
 
-  function createPost(string url) public {
+  function createPost(string url, string caption) public {
     // 5 coins per post
     var post = addressToPost[msg.sender];
     post.url = url;
     post.lotteryAmount -= 5;
     post.userName = addressToUser[msg.sender].name;
     post.owner = msg.sender;
+    post.caption = caption;
 
     posts.push(msg.sender) -1;
     addressToUser[msg.sender].coinBalance -= 5;
-    CreatedPost(url);
+    CreatedPost(url, caption);
   }
 
   function likePost(address post, uint amount) public {
@@ -86,10 +88,10 @@ contract CapCoin is Ownable {
       return posts;
   }
 
-  function seed(string name, string url, uint amount) public {
+  function seed(string name, string url, uint amount, string caption) public {
       createUser(name);
       buyTokens(amount);
-      createPost(url);
+      createPost(url, caption);
   }
 
     function kill() {

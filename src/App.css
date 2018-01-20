@@ -79,6 +79,7 @@ code {
 
 #main-header {
   font-size: 3em;
+  text-align: center;
 }
 
 #post-container {
@@ -99,4 +100,26 @@ code {
 
 #action-options {
   margin-right: 1em;
+}
+
+.action-box {
+
+  border: 2px solid silver;
+  border-radius: 4px;
+}
+
+#create-post-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.home-button{
+  position: fixed;
+  top: 7.5%;
+  right: 7.5%;
+}
+
+.error-message {
+  color: red
 }

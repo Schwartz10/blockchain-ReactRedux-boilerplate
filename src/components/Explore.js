@@ -28,6 +28,7 @@ class Explore extends Component {
                     tokenPot={post.tokenPot}
                     postUrl={post.postUrl}
                     address={post.address}
+                    caption={post.caption}
                     isPreview={false}
                   />
                 </div>

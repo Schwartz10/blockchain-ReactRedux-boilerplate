@@ -8,6 +8,9 @@ const styles = {
   button: {
     width: "7em",
     height: "3em",
+    position: 'fixed',
+    top: "7.5%",
+    left: "7.5%"
   },
 };
 
