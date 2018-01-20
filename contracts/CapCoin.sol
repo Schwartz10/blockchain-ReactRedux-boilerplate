@@ -13,6 +13,12 @@ contract CapCoin is Ownable {
 
   uint coinSupply = 1000000;
   uint coinsBought = 0;
+  address owner;
+  uint value;
+
+  function CapCoin () {
+    owner = msg.sender;
+  }
 
   struct User {
     string name;
@@ -46,10 +52,11 @@ contract CapCoin is Ownable {
   }
 
   // need to add economics
-  function buyTokens(uint amount) public {
+  function buyTokens(uint amount) payable public {
     addressToUser[msg.sender].coinBalance += amount;
     coinsBought += amount;
     coinSupply -= amount;
+    value += msg.value;
     BoughtTokens(addressToUser[msg.sender].coinBalance);
   }
 
@@ -85,5 +92,11 @@ contract CapCoin is Ownable {
       createPost(url);
   }
 
-  function() internal payable {}
+    function kill() {
+      if (msg.sender == owner) {
+        selfdestruct(owner);
+      }
+    }
+
+  function() payable {}
 }

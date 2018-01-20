@@ -51,9 +51,10 @@ export const addUser = (name, contractFunc, account) =>
     })
     .catch(err => console.log(err));
 
-export const buyTokens = (amount, contractFunc, account) =>
+export const buyTokens = (amount, contractFunc, account, conversionFunc) =>
   dispatch =>
-    contractFunc(amount, {from: account})
+    contractFunc(amount, {from: account, gas: 1000000, value: conversionFunc(amount/10, 'ether')})
+    // contractFunc(amount, {from: account})
     .then(res => dispatch(boughtTokens(res.logs[0].args.coinBalance.c[0])))
     .catch(err => console.log(err));
 
