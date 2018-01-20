@@ -17,9 +17,9 @@ const Post = props => (
       >
         <img src={props.postUrl} alt="" />
       </CardMedia>
+      <CardTitle subtitle={props.caption}/>
       {!props.isPreview &&
         <div>
-          <CardTitle title="Like this pic?"/>
           <CardActions>
             <LikePhoto
               postUrl={props.postUrl}

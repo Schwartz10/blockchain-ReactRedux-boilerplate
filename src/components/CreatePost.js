@@ -10,7 +10,7 @@ class CreatePost extends Component {
   constructor(props){
     super(props);
     this.state = { canPost: this.props.user.coinBalance >= 5,
-    postUrl: "" }
+    postUrl: "", caption: "" }
   }
 
   handleChange = (event) => {
@@ -18,6 +18,10 @@ class CreatePost extends Component {
       postUrl: event.target.value,
     });
   };
+
+  handleCaption = (event) => {
+    this.setState({caption: event.target.value})
+  }
 
   render(){
     return(
@@ -34,15 +38,21 @@ class CreatePost extends Component {
           { this.state.postUrl.length &&
             <div>
               <h3>Post Preview:</h3>
+              <TextField
+                value={this.props.postUrl}
+                hintText={!this.state.caption.length && "Enter Caption"}
+                onChange={this.handleCaption}
+              /><br />
               <Post
                 username={this.props.user.name}
                 tokenPot={-5}
                 postUrl={this.state.postUrl}
+                caption={this.state.caption}
                 isPreview={true}
               />
               <RaisedButton
                 onClick={e =>
-                this.props.post(e, this.state.postUrl, this.props.contract.createPost, this.props.accounts[0], this.props.user.name)}
+                this.props.post(e, this.state.postUrl, this.props.contract.createPost, this.props.accounts[0], this.props.user.name, this.state.caption)}
                 label="Create Post" primary={true}
               />
             </div>
@@ -71,9 +81,10 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    post: function(e, postUrl, contractFunc, account, username){
+    post: function(e, postUrl, contractFunc, account, username, caption){
       e.preventDefault();
-      return dispatch(post(postUrl, contractFunc, account, username));
+      console.log(postUrl, contractFunc, account, username, caption)
+      return dispatch(post(postUrl, contractFunc, account, username, caption));
     }
   }
 }
