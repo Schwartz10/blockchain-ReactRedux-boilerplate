@@ -16,45 +16,25 @@ const styles = {
   },
 };
 
-export default class Routes extends Component {
-  componentDidMount () {}
+const Routes = () =>
+  <Router history={history}>
+      <div>
+        <span>
+          <Drawer />
+          <h1 id="main-header">InstaCoin</h1>
+          <Link to="/" >
+            <RaisedButton className='home-button' buttonStyle={styles.button}
+            primary={true} label="home" />
+          </Link>
+        </span>
+        <Switch>
+          <Route exact path='/profile' component={Account} />
+          <Route exact path='/exchange' component={Exchange} />
+          <Route exact path='/explore' component={Explore} />
+          <Route exact path='/create-post' component={CreatePost} />
+          <Route exact path='/' component={Explore} />
+        </Switch>
+      </div>
+  </Router>
 
-  render () {
-    return (
-      <Router history={history}>
-          <div>
-            <span>
-            <div id="navigation">
-              <Drawer />
-              <h1 id="main-header">InstaCoin</h1>
-              <Link to="/" >
-                <RaisedButton buttonStyle={styles.button}
-                primary={true} label="home" />
-              </Link>
-            </div>
-            </span>
-            <Switch>
-              <Route exact path='/profile' component={Account} />
-              <Route exact path='/exchange' component={Exchange} />
-              <Route exact path='/explore' component={Explore} />
-              <Route exact path='/create-post' component={CreatePost} />
-              <Route exact path='/' component={Explore} />
-            </Switch>
-          </div>
-      </Router>
-    )
-  }
-}
-
-/**
- * CONTAINER
- */
-// const mapState = (state) => {
-//   return {}
-// }
-
-// const mapDispatch = (dispatch) => {
-//   return {}
-// }
-
-// export default connect(mapState, mapDispatch)(Routes)
+export default Routes;
