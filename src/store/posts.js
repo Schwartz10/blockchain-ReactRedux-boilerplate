@@ -57,9 +57,9 @@ export const fetchPosts = (fetchAddressArray, addressToPostFunc) =>
     .catch(err => console.log(err))
 
   // in process
-export const likePost = (postUrl, postAddress, contractFunc, account) =>
+export const likePost = (postUrl, postAddress, contractFunc, account, reward) =>
   dispatch =>
-    contractFunc(postAddress, 10, {from: account})
+    contractFunc(postAddress, reward, {from: account})
     .then(res => {
       let postInfo = Object.assign({}, res.logs[0].args);
       postInfo.likerCoinbalance = Number(postInfo.likerCoinbalance.toString(10));
