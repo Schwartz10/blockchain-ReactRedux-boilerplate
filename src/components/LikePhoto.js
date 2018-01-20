@@ -11,7 +11,7 @@ class LikePhoto extends Component {
   render(){
     return(
       <div>
-      <RaisedButton label="like" onClick={e => this.props.like(e, this.props.postUrl, this.props.postAddress, this.props.contract.likePost, this.props.accounts[0])}/>
+      <RaisedButton primary={true} label="like" onClick={e => this.props.like(e, this.props.postUrl, this.props.postAddress, this.props.contract.likePost, this.props.accounts[0])}/>
       </div>
     )
   }

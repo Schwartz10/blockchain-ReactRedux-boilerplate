@@ -66,3 +66,25 @@ code {
   height: 16px;
   margin-right: 10px;
 }
+
+#navigation {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 10em;
+  margin-right: 10em;
+  margin-top: 3em;
+}
+
+#main-header {
+  font-size: 3em;
+}
+
+#post-container {
+  display: flex;
+  justify-content: center;
+}
+
+.single-view-header {
+  text-align: center;
+}

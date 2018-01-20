@@ -9,6 +9,13 @@ import CreatePost from './CreatePost';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom';
 
+const styles = {
+  button: {
+    width: "7em",
+    height: "3em",
+  },
+};
+
 export default class Routes extends Component {
   componentDidMount () {}
 
@@ -17,8 +24,14 @@ export default class Routes extends Component {
       <Router history={history}>
           <div>
             <span>
-            <Drawer />
-            <Link to="/" ><RaisedButton label="home" /> </Link>
+            <div id="navigation">
+              <Drawer />
+              <h1 id="main-header">InstaCoin</h1>
+              <Link to="/" >
+                <RaisedButton buttonStyle={styles.button}
+                primary={true} label="home" />
+              </Link>
+            </div>
             </span>
             <Switch>
               <Route exact path='/profile' component={Account} />

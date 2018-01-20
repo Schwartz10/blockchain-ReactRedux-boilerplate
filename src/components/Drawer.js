@@ -4,6 +4,14 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Link } from 'react-router-dom'
 
+const styles = {
+  button: {
+    width: "7em",
+    height: "3em",
+  },
+};
+
+
 export default class DrawerNav extends React.Component {
 
   constructor(props) {
@@ -19,6 +27,8 @@ export default class DrawerNav extends React.Component {
     return (
       <div>
         <RaisedButton
+          buttonStyle={styles.button}
+          primary={true}
           label="Menu"
           onClick={this.handleToggle}
         />
