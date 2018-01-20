@@ -63,7 +63,7 @@ class LikePhoto extends Component {
               <ContentRemove />
           </FloatingActionButton>
         </div>
-        <RaisedButton primary={true} label="Reward" onClick={e => this.props.like(e, this.props.postUrl, this.props.postAddress, this.props.contract.likePost, this.props.accounts[0], this.state.reward)}/>
+        <RaisedButton primary={true} disabled={this.state.reward <= 0} label="Reward" onClick={e => this.props.like(e, this.props.postUrl, this.props.postAddress, this.props.contract.likePost, this.props.accounts[0], this.state.reward)}/>
       </div>
     )
   }

@@ -32,7 +32,7 @@ class Exchange extends Component {
         </SelectField>
         <RaisedButton
           onClick={(e) =>
-          this.props.buyTokens(e, this.state.value, this.props.contract.buyTokens, this.props.accounts[0])}
+          this.props.buyTokens(e, this.state.value, this.props.contract.buyTokens, this.props.accounts[0], this.props.web3.toWei)}
           label="Buy Tokens" primary={true}
         />
         <h3>You have {this.props.user.coinBalance} Coins</h3>
@@ -43,6 +43,7 @@ class Exchange extends Component {
 
 const mapState = (state) => {
   return {
+    web3: state.web3,
     user: state.user,
     contract: state.contract,
     accounts: state.accounts
@@ -51,9 +52,9 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    buyTokens: function(e, amount, contractFunc, account){
+    buyTokens: function(e, amount, contractFunc, account, conversionFunc){
       e.preventDefault()
-      return dispatch(buyTokens(amount, contractFunc, account))
+      return dispatch(buyTokens(amount, contractFunc, account, conversionFunc))
     }
   }
 }
