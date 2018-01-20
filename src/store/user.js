@@ -74,6 +74,7 @@ export default function (state = defaultUser, action) {
       let updatedUser = Object.assign({}, state)
       updatedUser.postUrl = action.post.postUrl;
       updatedUser.postLottery = action.post.tokenPot;
+      updatedUser.coinBalance -= 5;
       return updatedUser;
     default:
       return state
