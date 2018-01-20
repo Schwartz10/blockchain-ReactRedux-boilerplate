@@ -3,6 +3,7 @@
 body,
 .pure-g [class*=pure-u] {
   font-family: 'Open Sans', sans-serif;
+  background-color: #DDDDDD
 }
 
 h1, h2, h3 {
@@ -87,4 +88,15 @@ code {
 
 .single-view-header {
   text-align: center;
+}
+
+#action-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 1em;
+}
+
+#action-options {
+  margin-right: 1em;
 }
