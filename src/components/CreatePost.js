@@ -25,7 +25,7 @@ class CreatePost extends Component {
         {this.props.user ?
         <div>
           <h1>Create Your Post {this.props.user.name}</h1>
-          <h3>You currently have {this.props.user.coinBalance} Tokens <br /></h3>
+          <h3>You currently have {this.props.user.coinBalance} Coins <br /></h3>
           <TextField
             value={this.props.postUrl}
             hintText={!this.state.postUrl.length && "Enter Post URL"}

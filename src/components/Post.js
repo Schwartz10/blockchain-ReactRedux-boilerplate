@@ -1,6 +1,5 @@
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia, CardTitle } from 'material-ui/Card';
-import FlatButton from 'material-ui/FlatButton';
 import LikePhoto from './LikePhoto';
 
 const cardStyle = {

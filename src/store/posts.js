@@ -28,7 +28,8 @@ export const post = (url, contractFunc, account) =>
     contractFunc(url, {from: account})
     .then(res => {
       let newPost = {}
-      newPost[account] = res.logs[0].args.url;
+      newPost.postUrl = res.logs[0].args.url;
+      newPost.account = account;
       newPost.tokenPot = -5
       return dispatch(createPost(newPost));
     })
