@@ -23,14 +23,15 @@ const likedPost = post => ({type: LIKED_POST, post});
  * THUNK CREATORS
  */
 
-export const post = (url, contractFunc, account) =>
+export const post = (url, contractFunc, account, username) =>
   dispatch =>
     contractFunc(url, {from: account})
     .then(res => {
       let newPost = {}
       newPost.postUrl = res.logs[0].args.url;
-      newPost.account = account;
-      newPost.tokenPot = -5
+      newPost.address = account;
+      newPost.tokenPot = -5;
+      newPost.username = username;
       return dispatch(createPost(newPost));
     })
     .catch(err => console.log(err));

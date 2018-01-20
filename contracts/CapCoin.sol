@@ -1,11 +1,13 @@
 pragma solidity ^0.4.18;
 
-contract CapCoin {
+import 'zeppelin-solidity/contracts/ownership/Ownable.sol';
+
+contract CapCoin is Ownable {
 
   event NewUser(string name);
   event BoughtTokens(uint coinBalance);
   event CreatedPost(string url);
-  event LikedPost(uint lotteryAmount, string posterName,
+  event LikedPost(int lotteryAmount, string posterName,
     address poster, uint posterCoinbalance, string likerName,
     address liker, uint likerCoinbalance);
 
@@ -20,7 +22,7 @@ contract CapCoin {
   struct Post {
     string url;
     string userName;
-    uint lotteryAmount;
+    int lotteryAmount;
     address owner;
   }
 
@@ -35,7 +37,7 @@ contract CapCoin {
     NewUser(name);
   }
 
-  function getUser() public view returns (string, uint, string, uint, address) {
+  function getUser() public view returns (string, uint, string, int, address) {
     return (addressToUser[msg.sender].name,
       addressToUser[msg.sender].coinBalance,
       addressToPost[msg.sender].url,
@@ -65,7 +67,7 @@ contract CapCoin {
   }
 
   function likePost(address post, uint amount) public {
-    addressToPost[post].lotteryAmount += amount;
+    addressToPost[post].lotteryAmount += int(amount);
     addressToUser[post].coinBalance += amount;
     addressToUser[msg.sender].coinBalance -= amount;
     LikedPost(addressToPost[post].lotteryAmount,
