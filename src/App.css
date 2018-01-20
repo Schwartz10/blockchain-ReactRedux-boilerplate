@@ -3,6 +3,7 @@
 body,
 .pure-g [class*=pure-u] {
   font-family: 'Open Sans', sans-serif;
+  background-color: #DDDDDD
 }
 
 h1, h2, h3 {
