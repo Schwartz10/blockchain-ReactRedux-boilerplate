@@ -1,3 +1,5 @@
+import likedPostHelper from './../utils/likedPost';
+
 /**
  * INITIAL STATE
  */
@@ -15,7 +17,7 @@ const LIKED_POST = 'LIKED_POST';
  */
 const createPost = post => ({type: CREATE_POST, post});
 const gotPosts = posts => ({type: GET_POSTS, posts});
-const likedPost = post => ({type: likedPost, post});
+const likedPost = post => ({type: LIKED_POST, post});
 
 /**
  * THUNK CREATORS
@@ -57,8 +59,11 @@ export const likePost = (postUrl, postAddress, contractFunc, account) =>
   dispatch =>
     contractFunc(postAddress, 10, {from: account})
     .then(res => {
-      let postInfo = res.logs[0].args;
-      console.log(postInfo)
+      let postInfo = Object.assign({}, res.logs[0].args);
+      postInfo.likerCoinbalance = Number(postInfo.likerCoinbalance.toString(10));
+      postInfo.posterCoinbalance = Number(postInfo.posterCoinbalance.toString(10));
+      postInfo.lotteryAmount = Number(postInfo.lotteryAmount.toString(10));
+      return dispatch(likedPost(postInfo))
     })
 
 /**
@@ -72,6 +77,8 @@ export default function (state = defaultPosts, action) {
       return posts;
     case GET_POSTS:
       return action.posts;
+    case LIKED_POST:
+      return likedPostHelper.updatePost(state, action.post);
     default:
       return state
   }

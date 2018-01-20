@@ -1,3 +1,5 @@
+import likedPostHelper from './../utils/likedPost';
+
 /**
  * INITIAL STATE
  */
@@ -9,6 +11,7 @@ const defaultUser = {}
 const GET_USER = 'GET_USER';
 const CREATE_USER = 'CREATE_USER';
 const BUY_TOKENS = 'BUY_TOKENS';
+const LIKED_POST = 'LIKED_POST'
 
 /**
  * ACTION CREATORS
@@ -16,6 +19,7 @@ const BUY_TOKENS = 'BUY_TOKENS';
 const getUser = user => ({type: GET_USER, user})
 const createUser = user => ({type: CREATE_USER, user})
 const boughtTokens = amount => ({type: BUY_TOKENS, amount})
+const likedPost = post => ({type: LIKED_POST, post});
 
 /**
  * THUNK CREATORS
@@ -56,7 +60,9 @@ export default function (state = defaultUser, action) {
     case CREATE_USER:
       return action.user;
     case BUY_TOKENS:
-      return Object.assign({}, state, {coinBalance: action.amount})
+      return Object.assign({}, state, {coinBalance: action.amount});
+    case LIKED_POST:
+      return likedPostHelper.updateUser(state, action.post);
     default:
       return state
   }
