@@ -123,3 +123,26 @@ code {
 .error-message {
   color: red
 }
+
+#exchange-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center
+}
+
+.action-token-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 2px solid silver;
+  border-radius: 4px;
+}
+
+.token-action {
+  margin-left: .5em;
+  margin-right: .5em
+}
+
+.warning-message {
+  text-align: center
+}
