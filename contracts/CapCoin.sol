@@ -10,6 +10,7 @@ contract CapCoin is Ownable {
   event LikedPost(int lotteryAmount, string posterName,
     address poster, uint posterCoinbalance, string likerName,
     address liker, uint likerCoinbalance);
+  event CashedOut(uint newCoinbalance, address user);
 
   uint coinSupply = 1000000;
   uint coinsBought = 0;
@@ -92,6 +93,18 @@ contract CapCoin is Ownable {
       createUser(name);
       buyTokens(amount);
       createPost(url, caption);
+  }
+
+  function cashOut(uint weiAmount, uint coinAmount) public {
+      assert(addressToUser[msg.sender].coinBalance > coinAmount);
+      addressToUser[msg.sender].coinBalance -= coinAmount;
+      value -= weiAmount;
+      msg.sender.transfer(weiAmount);
+      CashedOut(addressToUser[msg.sender].coinBalance, msg.sender);
+  }
+
+  function getContractBal() public view returns (uint) {
+      return value;
   }
 
     function kill() {

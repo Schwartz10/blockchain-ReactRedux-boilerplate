@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
-import { buyTokens } from '../store/user';
+import { buyTokens, cashOut } from '../store/user';
 
 class Exchange extends Component {
 
@@ -35,6 +35,11 @@ class Exchange extends Component {
           this.props.buyTokens(e, this.state.value, this.props.contract.buyTokens, this.props.accounts[0], this.props.web3.toWei)}
           label="Buy Tokens" primary={true}
         />
+        <RaisedButton
+          onClick={(e) =>
+          this.props.cashOut(e, this.props.user.coinBalance - 1, this.props.contract.cashOut, this.props.accounts[0], this.props.web3.toWei)}
+          label="Cash Out" primary={true}
+        />
         <h3>You have {this.props.user.coinBalance} Coins</h3>
       </div>
     );
@@ -54,7 +59,11 @@ const mapDispatch = (dispatch) => {
   return {
     buyTokens: function(e, amount, contractFunc, account, conversionFunc){
       e.preventDefault()
-      return dispatch(buyTokens(amount, contractFunc, account, conversionFunc))
+      return dispatch(buyTokens(amount, contractFunc, account, conversionFunc));
+    },
+    cashOut: function(e, amount, contractFunc, account, conversionFunc) {
+      e.preventDefault()
+      return dispatch(cashOut(amount, contractFunc, account, conversionFunc));
     }
   }
 }
