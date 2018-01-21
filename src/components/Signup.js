@@ -19,18 +19,22 @@ class Signup extends Component {
 
   render () {
     return (
-      <div>
+      <div className="single-page-container">
         <h1>Signup</h1>
-        <TextField
-          hintText="Name"
-          value={this.state.name}
-          onChange={this.handleChange}
-        /><br />
-        <RaisedButton
-          onClick={(e) =>
-          this.props.createUser(e, this.state.name, this.props.contract, this.props.accounts[0])}
-          label="Create Account" primary={true}
-        />
+        <div className="action-container">
+          <TextField
+            className="action-item"
+            hintText="Name"
+            value={this.state.name}
+            onChange={this.handleChange}
+          /><br />
+          <RaisedButton
+            className="action-item"
+            onClick={(e) =>
+            this.props.createUser(e, this.state.name, this.props.contract, this.props.accounts[0])}
+            label="Create Account" primary={true}
+          />
+        </div>
       </div>
     )
   }

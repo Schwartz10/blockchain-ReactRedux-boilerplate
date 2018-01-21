@@ -18,11 +18,11 @@ class Exchange extends Component {
 
   render() {
     return (
-      <div id="exchange-container">
+      <div className="single-page-container">
         <h1>Buy InstaCoins</h1>
-        <div className="action-token-container">
+        <div className="action-container">
           <SelectField
-            className="token-action"
+            className="action-item"
             floatingLabelText="Coin Amount"
             value={this.state.value}
             onChange={this.handleChange}
@@ -36,7 +36,7 @@ class Exchange extends Component {
             <MenuItem value={50} primaryText="50" />
           </SelectField>
           <RaisedButton
-            className="token-action"
+            className="action-item"
             onClick={(e) =>
             this.props.buyTokens(e, this.state.value, this.props.contract.buyTokens, this.props.accounts[0], this.props.web3.toWei)}
             label="Buy Tokens" primary={true}
@@ -45,16 +45,16 @@ class Exchange extends Component {
         <h3>You have {this.props.user.coinBalance} Coins</h3><br />
         {this.props.user.coinBalance > 0 &&
           <div>
-            <div className="action-token-container">
+            <div className="action-container">
               <TextField
-                className="token-action"
+                className="action-item"
                 hintText="Cash Out Amount"
                 value={this.state.cashOutAmount}
                 onChange={this.handleCashOutTextChange}
                 errorText={this.state.cashOutAmount > this.props.user.coinBalance - 1 && "Amount Needs to be less than your current coin balance"}
               /><br />
               <RaisedButton
-                className="token-action"
+                className="action-item"
                 disabled={Number(this.state.cashOutAmount) <= 0}
                 label="Cash Out" primary={true}
                 onClick={(e) =>
