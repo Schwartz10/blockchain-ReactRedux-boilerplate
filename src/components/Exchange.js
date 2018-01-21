@@ -44,6 +44,7 @@ class Exchange extends Component {
               hintText="Cash Out Amount"
               value={this.state.cashOutAmount}
               onChange={this.handleCashOutTextChange}
+              errorText={this.state.cashOutAmount > this.props.user.coinBalance - 1 && "Amount Needs to be less than your current coin balance"}
             /><br />
             <RaisedButton
             disabled={Number(this.state.cashOutAmount) <= 0}
