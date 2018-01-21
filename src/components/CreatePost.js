@@ -29,7 +29,7 @@ class CreatePost extends Component {
     return(
       <div>
         {this.props.user ?
-        <div id="create-post-container">
+        <div className="single-page-container">
             <h2>Create Your Post {this.props.user.name}</h2>
             {this.props.user && this.props.user.coinBalance > 0 ?
             <div>

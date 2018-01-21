@@ -4,7 +4,7 @@ import Signup from './Signup'
 import Profile from './Profile'
 
 const Account = props => (
-  <div>
+  <div className="single-page-container">
     <h1>Account</h1>
     {props.user && props.user.name ? <Profile /> : <Signup />}
   </div>

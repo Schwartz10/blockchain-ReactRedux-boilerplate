@@ -108,12 +108,6 @@ code {
   border-radius: 4px;
 }
 
-#create-post-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center
-}
-
 .home-button{
   position: fixed;
   top: 7.5%;
@@ -124,13 +118,13 @@ code {
   color: red
 }
 
-#exchange-container {
+.single-page-container {
   display: flex;
   flex-direction: column;
   align-items: center
 }
 
-.action-token-container {
+.action-container {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -138,11 +132,38 @@ code {
   border-radius: 4px;
 }
 
-.token-action {
+.action-item {
   margin-left: .5em;
   margin-right: .5em
 }
 
 .warning-message {
   text-align: center
+}
+
+.centered-text {
+  text-align: center
+}
+
+#profile-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center
+}
+
+#account-info-top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#account-info-bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center
+}
+
+#profilepage-token-info {
+  margin-right: .3em
 }
