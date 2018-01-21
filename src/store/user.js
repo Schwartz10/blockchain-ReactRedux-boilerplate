@@ -13,6 +13,7 @@ const CREATE_USER = 'CREATE_USER';
 const BUY_TOKENS = 'BUY_TOKENS';
 const LIKED_POST = 'LIKED_POST';
 const CREATE_POST = 'CREATE_POST';
+const CASHED_OUT = 'CASHED_OUT';
 
 /**
  * ACTION CREATORS
@@ -20,6 +21,7 @@ const CREATE_POST = 'CREATE_POST';
 const getUser = user => ({type: GET_USER, user})
 const createUser = user => ({type: CREATE_USER, user})
 const boughtTokens = amount => ({type: BUY_TOKENS, amount})
+const cashedOut = amount => ({type: CASHED_OUT, amount})
 
 /**
  * THUNK CREATORS
@@ -54,8 +56,13 @@ export const addUser = (name, contractFunc, account) =>
 export const buyTokens = (amount, contractFunc, account, conversionFunc) =>
   dispatch =>
     contractFunc(amount, {from: account, gas: 1000000, value: conversionFunc(amount/10, 'ether')})
-    // contractFunc(amount, {from: account})
     .then(res => dispatch(boughtTokens(res.logs[0].args.coinBalance.c[0])))
+    .catch(err => console.log(err));
+
+export const cashOut = (amount, contractFunc, account, conversionFunc) =>
+  dispatch =>
+    contractFunc(conversionFunc(amount/10, 'ether'), amount, {from: account, gas: 1000000})
+    .then(res => dispatch(cashedOut(res.logs[0].args.newCoinbalance.c[0])))
     .catch(err => console.log(err));
 
 /**
@@ -77,6 +84,8 @@ export default function (state = defaultUser, action) {
       updatedUser.postLottery = action.post.tokenPot;
       updatedUser.coinBalance -= 5;
       return updatedUser;
+    case CASHED_OUT:
+      return Object.assign({}, state, {coinBalance: action.amount - 1});
     default:
       return state
   }
