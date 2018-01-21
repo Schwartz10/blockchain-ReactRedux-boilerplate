@@ -97,7 +97,7 @@ contract CapCoin is Ownable {
 
   function cashOut(uint weiAmount, uint coinAmount) public {
       assert(addressToUser[msg.sender].coinBalance > coinAmount);
-      addressToUser[msg.sender].coinBalance -= coinAmount;
+      addressToUser[msg.sender].coinBalance -= coinAmount + 1;
       value -= weiAmount;
       msg.sender.transfer(weiAmount);
       CashedOut(addressToUser[msg.sender].coinBalance, msg.sender);

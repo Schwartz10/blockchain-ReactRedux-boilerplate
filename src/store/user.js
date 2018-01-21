@@ -61,7 +61,7 @@ export const buyTokens = (amount, contractFunc, account, conversionFunc) =>
 
 export const cashOut = (amount, contractFunc, account, conversionFunc) =>
   dispatch =>
-    contractFunc(conversionFunc(amount/10, 'wei'), amount, {from: account, gas: 1000000})
+    contractFunc(conversionFunc(amount/10, 'ether'), amount, {from: account, gas: 1000000})
     .then(res => dispatch(cashedOut(res.logs[0].args.newCoinbalance.c[0])))
     .catch(err => console.log(err));
 
@@ -85,7 +85,7 @@ export default function (state = defaultUser, action) {
       updatedUser.coinBalance -= 5;
       return updatedUser;
     case CASHED_OUT:
-      return Object.assign({}, state, {coinBalance: action.amount});
+      return Object.assign({}, state, {coinBalance: action.amount - 1});
     default:
       return state
   }

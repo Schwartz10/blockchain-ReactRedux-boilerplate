@@ -4,15 +4,17 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import { buyTokens, cashOut } from '../store/user';
+import TextField from 'material-ui/TextField';
 
 class Exchange extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: 1};
+    this.state = {value: 1, cashOutAmount: ""};
   }
 
   handleChange = (event, index, value) => this.setState({value});
+  handleCashOutTextChange = (event) => this.setState({cashOutAmount: event.target.value})
 
   render() {
     return (
@@ -35,12 +37,23 @@ class Exchange extends Component {
           this.props.buyTokens(e, this.state.value, this.props.contract.buyTokens, this.props.accounts[0], this.props.web3.toWei)}
           label="Buy Tokens" primary={true}
         />
-        <RaisedButton
-          onClick={(e) =>
-          this.props.cashOut(e, this.props.user.coinBalance - 1, this.props.contract.cashOut, this.props.accounts[0], this.props.web3.toWei)}
-          label="Cash Out" primary={true}
-        />
-        <h3>You have {this.props.user.coinBalance} Coins</h3>
+        <h3>You have {this.props.user.coinBalance} Coins</h3><br />
+        {this.props.user.coinBalance > 0 &&
+          <div>
+            <TextField
+              hintText="Cash Out Amount"
+              value={this.state.cashOutAmount}
+              onChange={this.handleCashOutTextChange}
+            /><br />
+            <RaisedButton
+            disabled={Number(this.state.cashOutAmount) <= 0}
+            onClick={(e) =>
+            this.props.cashOut(e, Number(this.state.cashOutAmount - 1), this.props.contract.cashOut, this.props.accounts[0], this.props.web3.toWei)}
+            label="Cash Out" primary={true}
+            />
+            <p>*NOTE: There is a 1 coin fee for cashing out*</p>
+          </div>
+        }
       </div>
     );
   }
