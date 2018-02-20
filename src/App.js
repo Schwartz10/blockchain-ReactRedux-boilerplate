@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { fetchWeb3 } from './store/web3'
 import { fetchContract } from './store/contract'
 import { fetchAccounts } from './store/accounts';
-import { fetchUser } from './store/user'
 import Routes from './components/Routes'
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import './css/oswald.css'
 import './css/open-sans.css'
@@ -20,9 +18,6 @@ class App extends Component {
 
   componentWillMount() {
     this.collectBlockchainInfo()
-    .then(() => {
-      this.props.findUser(this.props.contract.getUser, this.props.accounts[0])
-    })
   }
 
   async collectBlockchainInfo() {
@@ -36,9 +31,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <MuiThemeProvider >
           <Routes />
-        </MuiThemeProvider>
       </div>
     );
   }
@@ -62,9 +55,6 @@ function mapDispatchToProps(dispatch){
     },
     getAccounts: function (web3){
       return dispatch(fetchAccounts(web3));
-    },
-    findUser: function (contractFunc, account){
-      return dispatch(fetchUser(contractFunc, account));
     }
   }
 }

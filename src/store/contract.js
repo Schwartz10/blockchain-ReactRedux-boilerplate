@@ -1,4 +1,4 @@
-import CapCoinContract from '../../build/contracts/CapCoin.json';
+import SimpleStorageContract from '../../build/contracts/SimpleStorage.json';
 
 /**
  * INITIAL STATE
@@ -20,9 +20,9 @@ const setContract = contract => ({type: GET_CONTRACT, contract})
  */
 export const fetchContract = web3  => {
   const contract = require('truffle-contract');
-  const capCoin = contract(CapCoinContract);
-  capCoin.setProvider(web3.currentProvider)
-  return dispatch => capCoin.deployed().then(contract => dispatch(setContract(contract)))
+  const simpleStorage = contract(SimpleStorageContract);
+  simpleStorage.setProvider(web3.currentProvider)
+  return dispatch => simpleStorage.deployed().then(contract => dispatch(setContract(contract)))
 }
 
 /**

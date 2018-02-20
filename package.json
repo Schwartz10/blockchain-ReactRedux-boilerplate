@@ -1,5 +1,5 @@
 {
-  "name": "react-box",
+  "name": "blockchain-boilerplate",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -50,7 +50,6 @@
   },
   "dependencies": {
     "dotenv": "^2.0.0",
-    "material-ui": "^0.20.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-loading-indicator": "^1.0.2",
