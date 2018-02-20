@@ -26,14 +26,18 @@ class SimpleStorage extends Component {
     }
   }
 
-  set(number){
-
+  addOne(){
+    this.props.contract.set(5, {from: this.props.accounts[0]})
+    .then(result => {
+      console.log(result)
+    })
   }
 
   render(){
     return(
       <div>
         <h1>The number stored in your smart contract is: <br /> {this.state.value} </h1>
+        <button onClick={this.addOne.bind(this)}>Add One</button>
       </div>
     )
   }
