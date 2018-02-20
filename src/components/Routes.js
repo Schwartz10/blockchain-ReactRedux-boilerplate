@@ -1,7 +1,6 @@
 import React from 'react'
 import {Route, Switch, Router} from 'react-router-dom'
 import history from '../history';
-import { Link } from 'react-router-dom';
 import SimpleStorage from './SimpleStorage';
 
 const Routes = () =>
