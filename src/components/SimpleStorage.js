@@ -27,10 +27,8 @@ class SimpleStorage extends Component {
   }
 
   addOne(){
-    this.props.contract.set(5, {from: this.props.accounts[0]})
-    .then(result => {
-      console.log(result)
-    })
+    this.props.contract.set(this.state.value + 1, {from: this.props.accounts[0]})
+    .then(result => this.setState({ value: this.state.value + 1 }))
   }
 
   render(){
