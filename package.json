@@ -62,7 +62,7 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "node scripts/start.js",
+    "start": "node scripts/start.js"
   },
   "jest": {
     "collectCoverageFrom": [
