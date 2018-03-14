@@ -22,9 +22,9 @@ class App extends Component {
 
   async collectBlockchainInfo() {
     // Get network provider, web3, and truffle contract instance and store them on state.
-    return Promise.all([await this.props.getWeb3(),
-     this.props.getContract(this.props.web3),
-     this.props.getAccounts(this.props.web3)])
+    const { web3 } = await this.props.getWeb3();
+    this.props.getContract(web3);
+    this.props.getAccounts(web3);
   }
 
 
