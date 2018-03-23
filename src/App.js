@@ -13,7 +13,7 @@ import './App.css'
 class App extends Component {
   constructor(props) {
     super(props);
-    this.collectBlockchainInfo = this.collectBlockchainInfo.bind(this)
+    this.collectBlockchainInfo = this.collectBlockchainInfo.bind(this);
   }
 
   componentWillMount() {

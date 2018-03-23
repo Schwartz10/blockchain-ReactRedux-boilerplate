@@ -23,6 +23,9 @@ Why did we do that? Because every once in a while, `blockchain-React-Redux-boile
 git fetch blockchain-React-Redux-boilerplate
 git merge blockchain-React-Redux-boilerplate/master
 ```
+## Using MetaMask versus fallback procedure
+
+The default behavior for this boilerplate uses MetaMask to inject the web3 object into your browser. If you'd prefer to use the fallback procedure, navigate to `src/utils/getWeb3.js` and make sure you set the provider to the correct localhost port where you're hosting your blockchain.
 
 Testing
 Run tests - `truffle test`
