@@ -17,7 +17,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.collectBlockchainInfo()
+    this.collectBlockchainInfo();
   }
 
   async collectBlockchainInfo() {
