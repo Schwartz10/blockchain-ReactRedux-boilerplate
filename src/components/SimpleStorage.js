@@ -6,36 +6,49 @@ You know you've correctly set up your environment if your simple storage contrac
 */
 
 class SimpleStorage extends Component {
+
   constructor(props){
     super(props)
     this.state = {
       value: 0,
-      dirty: false
+      error: null
     }
   }
 
-  componentDidMount(){
-    this.setState({ dirty: false })
+  // gets the number stored in smart contract storage
+  getNumber = () => {
+    const { contract, accounts } = this.props;
+    contract.get.call(accounts[0])
+    .then(value => {
+      // converts JS big number obj to string and back to number
+      value = Number(value.toString());
+      this.setState({ value })
+    })
+    .catch(error => this.setState({ error }));
   }
 
-  componentWillUpdate(nextProps, nextState){
-    // checks to see if we've fetched the necessary information from the blockchain
-    if (!this.state.dirty && nextProps.accounts.length && Object.keys(nextProps.contract).length) {
-      nextProps.contract.get.call(nextProps.accounts[0])
-      .then(result => this.setState({ value: result.c[0], dirty: true }))
-    }
-  }
-
-  addOne(){
-    this.props.contract.set(this.state.value + 1, {from: this.props.accounts[0]})
-    .then(result => this.setState({ value: this.state.value + 1 }))
+  // adds one to the storage in smart contract, refetches contract to update state
+  addOne = async () => {
+    const { contract, accounts } = this.props;
+    const { value } = this.state;
+    // sets the gas price manually to make sure the transaction goes through
+    await contract.set(value + 1, {from: accounts[0], gasPrice: 5000000000});
+    this.getNumber();
   }
 
   render(){
+    const { value, error } = this.state;
     return(
       <div>
-        <h1>The number stored in your smart contract is: <br /> {this.state.value} </h1>
-        <button onClick={this.addOne.bind(this)}>Add One</button>
+        {
+        error ?
+          <h1>Oh no! Something went wrong: {error}</h1> :
+          <div>
+            <h1>The number stored in your smart contract is: <br /> {value} </h1>
+            <button onClick={this.addOne}>Add One</button>
+            <button onClick={this.getNumber}>Get Number</button>
+          </div>
+        }
       </div>
     )
   }
