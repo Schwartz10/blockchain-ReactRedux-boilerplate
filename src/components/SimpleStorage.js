@@ -64,4 +64,4 @@ const mapState = (state) => {
   }
 }
 
-export default connect(mapState)(SimpleStorage)
+export default connect(mapState)(SimpleStorage);
