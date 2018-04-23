@@ -79,7 +79,7 @@ class Web3Manager extends React.Component {
 function mapStateToProps(state, props) {
   return {
     hasWeb3: Object.keys(state.web3).length > 0,
-    validNetwork: state.network,
+    validNetwork: state.validNetwork,
     currentAccount: state.account
   };
 }
