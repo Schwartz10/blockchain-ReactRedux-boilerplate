@@ -4,10 +4,11 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import web3 from './web3'
 import contract from './contract'
-import accounts from './accounts'
+import account from './accounts'
+import network from './network'
 
 
-export const reducer = combineReducers({ web3, contract, accounts })
+export const reducer = combineReducers({ web3, contract, account, network })
 const middleware = composeWithDevTools(applyMiddleware(
   thunkMiddleware,
   createLogger({collapsed: true})
