@@ -1,4 +1,4 @@
-import SimpleStorageContract from '../../build/contracts/SimpleStorage.json';
+import SimpleStorageContract from '../../../build/contracts/SimpleStorage.json';
 
 /**
  * INITIAL STATE

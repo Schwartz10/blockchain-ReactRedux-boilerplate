@@ -1,9 +1,7 @@
 import React from 'react';
 import Web3 from 'web3';
 import { connect } from 'react-redux';
-import { setWeb3 } from '../store/web3';
-import { setAccount } from '../store/accounts';
-import { setValidNetwork } from '../store/network';
+import { setWeb3, setAccount, setValidNetwork } from '../store/web3';
 
 const fetchWeb3 = (localProvider = null) => {
   let { web3 } = window;
