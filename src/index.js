@@ -9,7 +9,10 @@ import SimpleStorageContract from '../build/contracts/SimpleStorage';
 ReactDOM.render(
   <Provider store={store}>
     <div>
-      <Web3Manager contract={SimpleStorageContract} />
+      <Web3Manager
+        contract={SimpleStorageContract}
+        interval={100}
+      />
       <App />
     </div>
   </Provider>,

@@ -23,8 +23,9 @@ const fetchWeb3 = (localProvider = null) => {
 
 class Web3Manager extends React.Component {
   componentDidMount(){
+    const { interval } = this.props;
     // continuously look for updates to the window's web3 obj
-    this.intervalId = setInterval(this.collectWeb3Data.bind(this), 500);
+    this.intervalId = setInterval(this.collectWeb3Data.bind(this), interval || 500);
   }
 
   componentWillUnmount(){
