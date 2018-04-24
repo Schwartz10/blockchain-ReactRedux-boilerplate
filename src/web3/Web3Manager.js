@@ -1,7 +1,7 @@
 import React from 'react';
 import Web3 from 'web3';
 import { connect } from 'react-redux';
-import { setWeb3, setAccount, setValidNetwork } from '../store/web3';
+import { setWeb3, setAccount, setValidNetwork, initializeContract, fetchContract } from '../store/web3';
 
 const fetchWeb3 = (localProvider = null) => {
   let { web3 } = window;
@@ -34,8 +34,11 @@ class Web3Manager extends React.Component {
 
   collectWeb3Data() {
     // if any localProvider was passed in as prop, we use it to construct the web3 object
-    const { localProvider, hasWeb3, currentAccount, validNetwork, requiredNetwork,
-      setWeb3, setAccount, setValidNetwork } = this.props;
+    const { localProvider, hasWeb3, setWeb3,
+      currentAccount, setAccount,
+      validNetwork, requiredNetwork, setValidNetwork,
+      initializedContract, fetchContract, contract } = this.props;
+
     const web3 = fetchWeb3(localProvider || null);
 
     /* --  we only dispatch actions if anything important CHANGED -- */
@@ -65,12 +68,19 @@ class Web3Manager extends React.Component {
       if (recentlyChangedAccount || recentlyLoggedOut) {
         setAccount(account);
       }
+
+      /* -------- initializes smart contract if not already done ---------- */
+      if (!initializedContract && contract) {
+        // passes the compiled contract and web3 to initialize contract
+        initializeContract(contract, web3);
+        // puts contract on redux store state
+        fetchContract();
+      }
     }
   }
 
   render(){
-    // this component does not need to render any JSX
-    return(null);
+    return(null)
   }
 }
 
@@ -78,7 +88,8 @@ function mapStateToProps(state, props) {
   return {
     hasWeb3: Object.keys(state.web3).length > 0,
     validNetwork: state.validNetwork,
-    currentAccount: state.account
+    currentAccount: state.account,
+    initializedContract: Object.keys(state.contract).length > 0
   };
 }
 
@@ -87,6 +98,7 @@ export default connect(
   {
     setWeb3,
     setAccount,
-    setValidNetwork
+    setValidNetwork,
+    fetchContract
   }
 )(Web3Manager);
